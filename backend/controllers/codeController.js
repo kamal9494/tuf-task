@@ -74,7 +74,7 @@ exports.compile = async (req, res) => {
   try {
     const { language, stdin, code } = req.body;
     code.replace(/[\r\n]/g, "");
-    const response = await codeCompilation(language, code, stdin);
+    const response = await compileCode(language, code, stdin);
     const { stderr, stdout } = response;
 
     if (response.stderr)

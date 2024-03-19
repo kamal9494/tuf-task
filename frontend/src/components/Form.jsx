@@ -59,16 +59,18 @@ const Form = () => {
       const method = "POST";
       const response = await makeApiCall(URL, method, formData);
       console.log(response);
-      setOutput(response.data.output);
       if (response.status === 200) {
-        if (response.data.error)
+        if (response.data.error) {
           toast.warning(response.data.message, {
             duration: 3000,
           });
-        else
+          setOutput(response.data.error);
+        } else {
           toast.success(response.data.message, {
             duration: 3000,
           });
+          setOutput(response.data.output);
+        }
       } else {
         toast.error("Internal Server Error");
       }
@@ -117,7 +119,7 @@ const Form = () => {
           onSubmit={handleSubmit}
           className="flex flex-col lg:flex-row items-center gap-10 w-full p-10"
         >
-          <div className="min-w-[300px] bg-white p-4 rounded-lg lg:max-w-[50%] w-full">
+          <div className="min-w-[300px] bg-white shadow-md p-4 rounded-lg lg:max-w-[50%] w-full">
             <div className="flex items-center my-3 justify-between">
               <span className="font-medium text-lg">
                 Select Language<span className="text-red-500">*</span>
